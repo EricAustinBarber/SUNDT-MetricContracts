@@ -86,6 +86,18 @@ contract or using browser authentication.
 8. Record the response in an immutable publication audit.
 9. Enable the MCP/API read layer only for a successfully read-back version.
 
+The guarded implementation is:
+
+```powershell
+python tools/publish_data_product.py `
+  --payload build/group-health-data-product-0.1.0.json
+```
+
+This first reads the target product. A `200` produces an update plan, a `404`
+produces a create plan, and a `401`/`403` stops with
+`AUTHORIZATION_REQUIRED`. Add `--apply` only after the target read and dry-run
+plan have been approved.
+
 The current repository does steps 1 and 2 offline and has completed the
 Power BI asset pointer integration. Step 3 requires a schema validator; steps
 4–8 require Data Product Service authorization.

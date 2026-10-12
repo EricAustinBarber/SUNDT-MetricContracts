@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-10-12T18:34:58.883645+00:00",
+  "productId": "group-health-dashboard",
+  "version": "0.1.0",
+  "mode": "dry_run",
+  "payload": "C:\\Users\\eabarber\\CodeX\\Alation\\DataProductsDudiligence\\GroupHealth\\dashboards\\powerbi-data-contract-repo\\build\\group-health-data-product-0.1.0.json",
+  "status": "AUTHORIZATION_REQUIRED",
+  "detail": "Target Data Product is not readable; no create or update was attempted.",
+  "targetReadStatus": 401,
+  "writeStatus": null,
+  "readBackStatus": null
+}
