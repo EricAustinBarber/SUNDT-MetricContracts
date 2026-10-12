@@ -52,6 +52,12 @@ An authorized publication job or operator:
 
 If the target product cannot be read with the API token, publication stops. Do not use browser sign-in as a workaround for an API-only process.
 
+For the current Group Health implementation, run the repository publication
+adapter in dry-run mode first, then repeat with `--apply` only after steward
+approval. See `docs/alation-publication-adapter.md`. The adapter updates and
+verifies only the contract pointer on explicitly identified Power BI assets;
+Data Product Service publication remains a separate gated step.
+
 ## Step 6: Runtime release
 
 The MCP/API layer may expose a contract only after publication read-back succeeds. Responses must identify the contract version and governance state.
