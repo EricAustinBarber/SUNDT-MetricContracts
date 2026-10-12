@@ -60,8 +60,11 @@ Authorization must be validated with these read-only checks:
 1. `GET /dps/api/v1/specs/product/` returns the specification schema.
 2. `GET /dps/api/v1/data-product/` returns a successful authorized response.
 3. `GET /dps/api/v1/data-product/{productId}/` returns the target product.
-4. The returned product ID is confirmed to be `group-health-dashboard`.
-5. A publication service identity can read the product after publication.
+4. `GET /dps/api/v1/data-products/permissions/`,
+   `/user-permissions/`, and `/check-permissions/` are reachable with the
+   same service identity.
+5. The returned product ID is confirmed to be `group-health-dashboard`.
+6. A publication service identity can read the product after publication.
 
 Run the repository diagnostic with:
 
@@ -70,8 +73,9 @@ python tools/check_data_product_access.py --product-id group-health-dashboard
 ```
 
 Exit code `2` means the target product endpoint returned `401` or `403` and
-the service identity needs Data Product permission. The diagnostic never
-attempts a Data Product write.
+the service identity needs a valid Data Product Service session or permission.
+The diagnostic also checks the documented permission routes and never attempts
+a Data Product write.
 
 Testing alternate header formats does not replace a Data Product Service
 session. If all supported headers return 401, the next technical question for

@@ -20,6 +20,9 @@ def check(base: str, headers: dict[str, str], product_id: str) -> list[dict[str,
         ("products", "/dps/api/v1/data-product/"),
         ("target_product", f"/dps/api/v1/data-product/{product_id}/"),
         ("marketplaces", "/dps/api/v1/marketplace/"),
+        ("permissions", "/dps/api/v1/data-products/permissions/"),
+        ("user_permissions", "/dps/api/v1/data-products/user-permissions/"),
+        ("check_permissions", "/dps/api/v1/data-products/check-permissions/"),
     ]
     results = []
     for name, path in paths:
