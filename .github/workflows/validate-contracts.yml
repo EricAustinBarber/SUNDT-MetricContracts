@@ -34,3 +34,6 @@ jobs:
           python tools/validate_data_product_payload.py
           --contract contracts/group-health-dashboard/0.1.0.json
           --payload build/group-health-data-product-0.1.0.json
+      - name: Test agent read layer
+        working-directory: tools
+        run: python -m unittest test_contract_read_layer.py
