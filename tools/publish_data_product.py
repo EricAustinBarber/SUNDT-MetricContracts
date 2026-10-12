@@ -76,7 +76,7 @@ def main() -> int:
     if expected_product.get("productId") != args.product_id:
         raise SystemExit("payload productId does not match --product-id")
     cfg = load_config(args.env_file)
-    base_path = "/dps/api/v1/products/"
+    base_path = "/dps/api/v1/data-product/"
     target_path = base_path + args.product_id + "/"
     audit_path = args.audit or args.payload.parent / "publication-audit" / f"{args.product_id}-{expected_product.get('version', 'unknown')}.json"
     result = {

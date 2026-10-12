@@ -17,9 +17,9 @@ from config import load_powerbi_curation_config  # noqa: E402
 def check(base: str, headers: dict[str, str], product_id: str) -> list[dict[str, object]]:
     paths = [
         ("product_schema", "/dps/api/v1/specs/product/"),
-        ("products", "/dps/api/v1/products/"),
-        ("target_product", f"/dps/api/v1/products/{product_id}/"),
-        ("marketplaces", "/dps/api/v1/marketplaces/"),
+        ("products", "/dps/api/v1/data-product/"),
+        ("target_product", f"/dps/api/v1/data-product/{product_id}/"),
+        ("marketplaces", "/dps/api/v1/marketplace/"),
     ]
     results = []
     for name, path in paths:

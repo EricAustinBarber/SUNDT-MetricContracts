@@ -45,13 +45,21 @@ join semantics.
 The available API token currently passes normal catalog API calls and reads the
 Data Product specification schemas, but receives `401 Session and Token
 validation failed` for Data Product product and marketplace instances. This
-means publication is not yet authorized.
+means the Data Product Service is not accepting this credential as a valid
+service session, even though the token identity is `server_admins` / `is_admin`.
+
+The tenant's Data Product OpenAPI document is available at
+`/dps/api/v1/openapi.json`. It documents the product routes under
+`/api/v1/data-product/` and the permission routes under
+`/api/v1/data-products/`. Its 401 response describes an invalid or unavailable
+Alation session, so this is now an authentication/session integration issue,
+not a missing product feature or missing standard catalog administrator role.
 
 Authorization must be validated with these read-only checks:
 
 1. `GET /dps/api/v1/specs/product/` returns the specification schema.
-2. `GET /dps/api/v1/products/` returns a successful authorized response.
-3. `GET /dps/api/v1/products/{productId}/` returns the target product.
+2. `GET /dps/api/v1/data-product/` returns a successful authorized response.
+3. `GET /dps/api/v1/data-product/{productId}/` returns the target product.
 4. The returned product ID is confirmed to be `group-health-dashboard`.
 5. A publication service identity can read the product after publication.
 
@@ -65,10 +73,11 @@ Exit code `2` means the target product endpoint returned `401` or `403` and
 the service identity needs Data Product permission. The diagnostic never
 attempts a Data Product write.
 
-Testing alternate header formats does not replace a Data Product Service scope
-or role grant. If all supported headers return 401, request the Data Product
-Service permission for the service identity/token rather than changing the
-contract or using browser authentication.
+Testing alternate header formats does not replace a Data Product Service
+session. If all supported headers return 401, the next technical question for
+Alation support is which API-only session or OAuth flow is supported for the
+Data Product Service. Do not change the contract or use browser authentication
+as a workaround.
 
 ## Publication sequence after authorization
 
