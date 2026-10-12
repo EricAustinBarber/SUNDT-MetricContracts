@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -20,12 +21,30 @@ def load_contract(path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
 
 
 def envelope(contract: dict[str, Any], payload: Any, status: str = "OK") -> dict[str, Any]:
+    review = contract.get("review", {})
+    certification = review.get("certificationStatus", "unreviewed")
+    access_decision = "allowed" if contract.get("contractStatus") == "published" and certification == "approved" else "review"
     return {
         "status": status,
         "productId": contract["product"]["productId"],
         "contractVersion": contract["contractVersion"],
         "contractStatus": contract["contractStatus"],
-        "data": payload,
+        "asOf": datetime.now(timezone.utc).isoformat(),
+        "result": payload,
+        "sources": [
+            {
+                "type": "contract_repository",
+                "productId": contract["product"]["productId"],
+                "contractVersion": contract["contractVersion"],
+            }
+        ],
+        "governance": {
+            "owner": review.get("owner", ""),
+            "steward": review.get("steward", ""),
+            "certificationStatus": certification,
+            "accessDecision": access_decision,
+        },
+        "limitations": review.get("knownLimitations", []),
     }
 
 

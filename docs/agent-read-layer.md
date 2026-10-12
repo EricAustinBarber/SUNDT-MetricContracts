@@ -14,6 +14,8 @@ python tools/contract_read_layer.py validate_metric_request "FIN_Score_Trending"
 ```
 
 Every response includes the product ID, contract version, and contract state.
+It also includes the standard `asOf`, `sources`, `governance`, and
+`limitations` fields required by the agent interface design.
 The adapter returns explicit statuses such as `NOT_FOUND`, `UNCERTIFIED`,
 `INVALID_AGGREGATION`, and `UNRESOLVED_LINEAGE`; it never substitutes a
 similarly named metric.
@@ -29,3 +31,6 @@ The future MCP service should map these operations to the following resources:
 - `alation://data-products/group-health-dashboard/metrics/{metricId}/lineage`
 - `alation://data-products/group-health-dashboard/metrics/{metricId}/visual-usage`
 - `alation://data-products/group-health-dashboard/relationships`
+
+The machine-readable interface definition is
+`config/mcp-interface.group-health.json`.

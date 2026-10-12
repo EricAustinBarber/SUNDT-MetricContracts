@@ -1,0 +1,78 @@
+{
+  "interfaceVersion": "0.1.0",
+  "productId": "group-health-dashboard",
+  "contractVersionSource": "contracts/group-health-dashboard/0.1.0.json",
+  "resources": [
+    {
+      "uriTemplate": "alation://data-products/{productId}",
+      "purpose": "Return product identity, contract version, governance state, assets, and limitations."
+    },
+    {
+      "uriTemplate": "alation://data-products/{productId}/metrics/{metricId}",
+      "purpose": "Return exact metric definition, DAX, dependencies, grain, format, and review state."
+    },
+    {
+      "uriTemplate": "alation://data-products/{productId}/metrics/{metricId}/lineage",
+      "purpose": "Return model, source paths, Alation references, and unresolved lineage states."
+    },
+    {
+      "uriTemplate": "alation://data-products/{productId}/metrics/{metricId}/visual-usage",
+      "purpose": "Return downstream report and visual consumption evidence."
+    },
+    {
+      "uriTemplate": "alation://data-products/{productId}/relationships",
+      "purpose": "Return Power BI relationship evidence without inferring missing cardinality."
+    }
+  ],
+  "tools": [
+    {
+      "name": "search_metrics",
+      "purpose": "Find governed metrics by business or model terms.",
+      "requiredInputs": ["query"],
+      "optionalInputs": ["includeUncertified"],
+      "successResultFields": ["metricId", "displayName", "definition", "role", "reviewStatus", "matchTerms"]
+    },
+    {
+      "name": "get_metric_definition",
+      "purpose": "Return the exact DAX and metric contract semantics.",
+      "requiredInputs": ["metricId"],
+      "successResultFields": ["daxExpression", "expressionLanguage", "formatString", "grain", "aggregationRule", "directDependencies", "transitiveDependencies"]
+    },
+    {
+      "name": "get_metric_lineage",
+      "purpose": "Return upstream model and source lineage.",
+      "requiredInputs": ["metricId"],
+      "successResultFields": ["modelTable", "sourcePaths", "alationObjectIds", "lineageStatus"]
+    },
+    {
+      "name": "get_metric_visual_usage",
+      "purpose": "Return downstream visual usage and impact evidence.",
+      "requiredInputs": ["metricId"],
+      "successResultFields": ["referenceCount", "visuals", "impactStatus"]
+    },
+    {
+      "name": "get_join_context",
+      "purpose": "Return model relationship evidence for a table or the full model.",
+      "requiredInputs": [],
+      "optionalInputs": ["table"],
+      "successResultFields": ["count", "relationships", "note"]
+    },
+    {
+      "name": "validate_metric_request",
+      "purpose": "Check metric approval, aggregation, grain, and lineage before chart generation.",
+      "requiredInputs": ["metricId"],
+      "optionalInputs": ["aggregation", "grain", "includeUncertified"],
+      "successStatuses": ["VALID", "NOT_FOUND", "UNCERTIFIED", "INVALID_AGGREGATION", "INVALID_GRAIN", "UNRESOLVED_LINEAGE"]
+    }
+  ],
+  "responseEnvelope": {
+    "requiredFields": ["status", "productId", "contractVersion", "contractStatus", "asOf", "result", "sources", "governance", "limitations"],
+    "governanceAccessDecisions": ["allowed", "blocked", "review"]
+  },
+  "security": {
+    "defaultAccessDecision": "review",
+    "publishedAndApprovedAccessDecision": "allowed",
+    "neverExpose": ["tokens", "credentials", "unapproved data values"],
+    "auditFields": ["productId", "contractVersion", "toolName", "callerIdentity", "timestamp", "status"]
+  }
+}
