@@ -34,3 +34,24 @@ The future MCP service should map these operations to the following resources:
 
 The machine-readable interface definition is
 `config/mcp-interface.group-health.json`.
+
+## Local transport adapter
+
+For development, the same interface is available as a localhost-only HTTP
+service:
+
+```powershell
+python tools/contract_http_service.py
+```
+
+Resource examples:
+
+```text
+GET  http://127.0.0.1:8765/health
+GET  http://127.0.0.1:8765/resources/data-products/group-health-dashboard
+GET  http://127.0.0.1:8765/resources/data-products/group-health-dashboard/metrics/FIN_Score_Trending
+POST http://127.0.0.1:8765/tools/get_metric_definition
+```
+
+The HTTP adapter is a development transport, not the production MCP service.
+It has no data-query capability and should not be bound to a public interface.
