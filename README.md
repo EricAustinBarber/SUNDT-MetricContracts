@@ -28,6 +28,9 @@ docs/            Workflow, governance, and design guidance
 tools/           Local validation utilities
 ```
 
+The supported Alation publication and agent-consumption model is documented in
+[`docs/supported-alation-operating-model.md`](docs/supported-alation-operating-model.md).
+
 ## Analyst workflow
 
 1. Copy `templates/powerbi-alation-contract.template.json` into `contracts/<product-id>/<version>.json`.
