@@ -43,7 +43,25 @@ Each metric record must include:
 - direct and transitive dependencies
 - report pages, visuals, and KPI cards using the metric
 - upstream model/source lineage
+- deployment path from report to page/visual to measure to DAX
 - certification and confidence status
+
+## Deployment-path requirement
+
+Every metric must make its edit and consumption path explicit:
+
+`Power BI report → page → visual → field reference → semantic-model table → measure → DAX`
+
+For each directly referenced visual, retain the report ID, report name, page
+name, stable visual ID, visual name/title, visual type, and exact field
+reference. Also identify the semantic-model dataset where the DAX was
+extracted, the reconciled/deployed dataset when different, and the Alation
+asset IDs when available.
+
+The contract must state that the DAX is edited on the semantic-model measure;
+the report visual consumes the measure and does not own the DAX definition.
+Measures with no direct visual reference must remain in the contract and be
+marked as indirect, unused, or unresolved rather than omitted.
 
 ## Rules
 
@@ -61,10 +79,13 @@ Each metric record must include:
 2. Classify measures from names, expressions, format strings, and visual usage.
 3. Build direct dependency edges from the dependency inventory and measure references.
 4. Expand dependencies transitively with cycle detection.
-5. Attach report pages and visuals from the report inventory.
+5. Attach report pages and visuals from the report inventory, preserving stable
+   visual IDs and field references.
 6. Attach source paths from the source-lineage inventory.
-7. Add agent guidance for charting, filtering, grain, and aggregation.
-8. Write JSON and Markdown outputs and report unresolved items.
+7. Attach the source semantic-model asset, consuming report asset, reconciled
+   dataset identity, and DAX edit directions.
+8. Add agent guidance for charting, filtering, grain, and aggregation.
+9. Write JSON and Markdown outputs and report unresolved items.
 
 Use the bundled generator when available:
 

@@ -8,7 +8,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3] / "semantic-model-documentation"
+ROOT = Path(__file__).resolve().parents[3].parent / "semantic-model-documentation"
 OUT = ROOT / "agent-contract"
 
 
@@ -57,7 +57,16 @@ def main() -> None:
         for ref in row.get("field_references", "").split(" | "):
             name = ref.rsplit(".", 1)[-1]
             name = re.sub(r"^(?:Sum|Min|Max|Count|DistinctCount|Average)\((.*)\)$", r"\1", name, flags=re.I)
-            usages[name.upper()].append({"page": row.get("page_name", ""), "visual": row.get("visual_title", ""), "type": row.get("visual_type", "")})
+            usages[name.upper()].append({
+                "report_id": row.get("report_id", ""),
+                "report_name": row.get("report_name", ""),
+                "page": row.get("page_name", ""),
+                "visual_id": row.get("visual_id", ""),
+                "visual_name": row.get("visual_name", ""),
+                "visual_title": row.get("visual_title", ""),
+                "visual_type": row.get("visual_type", ""),
+                "field_reference": ref,
+            })
 
     sources_by_measure = defaultdict(set)
     for row in source_lineage:
@@ -100,6 +109,18 @@ def main() -> None:
             "transitive_dependencies": sorted(expand(key)),
             "visual_usage": used,
             "source_lineage": sorted(sources_by_measure.get(key, set())),
+            "deployment_path": {
+                "source_semantic_model_alation_id": "1355",
+                "consuming_report_alation_id": "1785",
+                "reconciled_semantic_model_alation_id": "1895",
+                "model_table": row.get("table", ""),
+                "measure_name": name,
+                "edit_directions": [
+                    "Open the mapped report and locate the listed page and visual.",
+                    "Open the report semantic model and locate the model table and measure.",
+                    "Edit the measure DAX in the semantic model; the visual consumes the measure and does not own the DAX definition.",
+                ],
+            },
             "certification_status": "documented_in_semantic_model",
         })
 
