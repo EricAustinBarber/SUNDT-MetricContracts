@@ -13,8 +13,28 @@
     ]
   },
   "assets": {
-    "reports": [],
-    "semanticModels": []
+    "reports": [
+      {
+        "name": "group-Group Health",
+        "alationId": 1785,
+        "externalId": "a9e46f0b-86b8-4ff0-9481-3bb4f0dd9644",
+        "role": "primary_report"
+      }
+    ],
+    "semanticModels": [
+      {
+        "name": "swa-dataset-project-controls-management-deathstar-pilot",
+        "alationId": 1355,
+        "externalId": "0b85fee7-230c-4f66-978e-084084e293d8",
+        "role": "report_parent_datasource"
+      },
+      {
+        "name": "swa-dataset-project-controls-management-executive",
+        "alationId": 1895,
+        "externalId": "6764eba3-b6a8-4c5b-a509-ffedf696f8e9",
+        "role": "reconciled_semantic_model"
+      }
+    ]
   },
   "metrics": [
     {
@@ -12637,14 +12657,904 @@
       }
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "name": "98b30db2-926b-c3d1-295f-8d45600189f3",
+      "fromTable": "fact_issues_log_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "83eaf121-7215-7c55-6003-94f5a6461025",
+      "fromTable": "fact_cor_log_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "e15a5dba-d7f4-c88d-c891-86c5e698f994",
+      "fromTable": "fact_issues_log_v",
+      "fromColumn": "dim_issue_key",
+      "toTable": "dim_issue_v",
+      "toColumn": "dim_issue_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "f83a2681-908a-2d9b-8c88-bf37a5a197b8",
+      "fromTable": "fact_cor_log_v",
+      "fromColumn": "dim_cor_key",
+      "toTable": "dim_cor_v",
+      "toColumn": "dim_cor_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "af3e7a54-9021-1fc6-ffdc-c22634a922eb",
+      "fromTable": "fact_issues_log_v",
+      "fromColumn": "dim_cor_key",
+      "toTable": "dim_cor_v",
+      "toColumn": "dim_cor_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "3bc86d5b-b945-2c14-bf76-d49040988314",
+      "fromTable": "fact_cco_log_v",
+      "fromColumn": "dim_cco_key",
+      "toTable": "dim_cco_v",
+      "toColumn": "dim_cco_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2c46608e-ca52-595d-1e0b-e6e7747c3e54",
+      "fromTable": "fact_issues_log_v",
+      "fromColumn": "dim_cco_key",
+      "toTable": "dim_cco_v",
+      "toColumn": "dim_cco_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "77d2b4db-ed3a-9198-9bd1-543d030e391c",
+      "fromTable": "fact_cco_log_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "4b636624-f0d6-abae-9266-b8f9c0b15254",
+      "fromTable": "fact_cor_log_v",
+      "fromColumn": "dim_cco_key",
+      "toTable": "dim_cco_v",
+      "toColumn": "dim_cco_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "516ae25c-5af1-43ff-ae33-ba9c728efb2e",
+      "fromTable": "fact_control_budget_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "cce7cf71-9912-b0e7-bfd3-bb20b6d72068",
+      "fromTable": "dim_project_v (1)",
+      "fromColumn": "dim_project_key",
+      "toTable": "fact_project_details_v",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "5de11fb2-257e-7d41-a962-5ef9aaa584c2",
+      "fromTable": "fact_issues_log_v",
+      "fromColumn": "created_date_key",
+      "toTable": "dim_date_v",
+      "toColumn": "date_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "dc7e57cf-7653-1d84-6e76-09daa96ad637",
+      "fromTable": "fact_control_budget_v",
+      "fromColumn": "dim_cost_item_key",
+      "toTable": "dim_cost_item_v",
+      "toColumn": "dim_cost_item_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2f32cf15-8177-24aa-2bf6-cddadc5b7c50",
+      "fromTable": "fact_project_billing_current_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "44726ae2-1aa4-a1fb-5bbb-59aecaf565b8",
+      "fromTable": "fact_project_cash_position_current_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "4d510c80-0616-f02e-1f2f-5d8f9830e2a9",
+      "fromTable": "fact_mpr_base_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "d273e08c-5ec4-1a08-feed-3570690dfb84",
+      "fromTable": "fact_project_cash_position_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "81ffd90e-223f-f9e7-6024-a0cd9f9efa78",
+      "fromTable": "fact_contracts_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "080cd46d-9198-d5bc-8993-33858c5c84ae",
+      "fromTable": "fact_accounts_payable_v",
+      "fromColumn": "business_unit_dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "b2ca816a-0384-12cb-48fb-1657d868c197",
+      "fromTable": "fact_accounts_payable_v",
+      "fromColumn": "dim_company_key",
+      "toTable": "dim_company_v",
+      "toColumn": "dim_company_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "1b728665-a11f-40d1-c75c-5172cbbae0bd",
+      "fromTable": "fact_contracts_v",
+      "fromColumn": "dim_company_key",
+      "toTable": "dim_company_v",
+      "toColumn": "dim_company_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "cacf0665-52c8-f1ee-40c3-f8a0b4e5ae31",
+      "fromTable": "fact_executive_summary_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "34f91134-3cfe-68e7-ca09-68c37b49bdb4",
+      "fromTable": "fact_executive_summary_v",
+      "fromColumn": "date_key",
+      "toTable": "dim_date_v",
+      "toColumn": "date_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "07a63179-5d60-b020-2cfb-b79384bfb54c",
+      "fromTable": "fact_pcco_adjustments_v",
+      "fromColumn": "fact_mpr_base_key",
+      "toTable": "fact_mpr_base_v",
+      "toColumn": "fact_mpr_base_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "3349d402-ea2f-9b5c-b55d-9c9dbe3502fa",
+      "fromTable": "fact_cost_vs_budget_summary_v",
+      "fromColumn": "fact_mpr_base_key",
+      "toTable": "fact_mpr_base_v",
+      "toColumn": "fact_mpr_base_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "41e3aeb2-24d0-5367-f70e-708c3518ec39",
+      "fromTable": "fact_accounts_receivable_v",
+      "fromColumn": "business_unity_dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_2487a47a-70cb-4ed5-b348-87f1cbafcded",
+      "fromTable": "bridge_user_project_relationship_v",
+      "fromColumn": "active_directory_users_key",
+      "toTable": "dim_active_directory_user_v",
+      "toColumn": "active_directory_users_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "9c969d34-566c-00f2-e56d-9d3787ec0918",
+      "fromTable": "bridge_user_project_relationship_v",
+      "fromColumn": "project_number",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_4708b481-fd23-4b21-a243-e39a4c7003d5",
+      "fromTable": "dim_project_v (2)",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_ed929316-d2d9-469c-afd3-5b9de726227d",
+      "fromTable": "vwcompliancegeneralheaderdata_v",
+      "fromColumn": "InspectActivityStatusId",
+      "toTable": "vwcomplianceactivitystatustext_v",
+      "toColumn": "InspectActivityStatusId",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_a7e0be3b-8c02-46ec-b844-c8884193a2c6",
+      "fromTable": "QDR",
+      "fromColumn": "CSI Codes",
+      "toTable": "dim_deficiency_csi_code_v_View",
+      "toColumn": "CSI Codes",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_c329d05f-9c1b-46ed-b95f-7d36934d163a",
+      "fromTable": "fact_deficiency",
+      "fromColumn": "CSI Codes",
+      "toTable": "dim_deficiency_csi_code_v_View",
+      "toColumn": "CSI Codes",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_faa67eb7-9458-4080-8655-ca2220ebd1c2",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "csi_key",
+      "toTable": "dim_deficiency_csi_code_v_View",
+      "toColumn": "csi_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_dd5b4e5b-067c-4dce-8b76-ed3c76a5a79c",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "deficiency_division_group_key",
+      "toTable": "dim_deficiency_division_group_v_View",
+      "toColumn": "deficiency_division_group_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_48732ed3-71b1-48fd-8e8d-e9dd262aa2ae",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "deficiency_category_key",
+      "toTable": "dim_deficiency_category_v_View",
+      "toColumn": "deficiency_category_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_f7e17dbe-e240-4615-a75e-46ef734a719f",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "deficiency_cause_disposition_key",
+      "toTable": "dim_deficiency_cause_disposition_v_View",
+      "toColumn": "deficiency_cause_disposition_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_ae3f3849-48fe-4e04-854d-f53fa4b40b07",
+      "fromTable": "dim_project_v (3)",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "3ee28f94-c391-a2cd-25ce-c2a72601132c",
+      "fromTable": "QDR",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "af32955f-8e51-502a-31ba-f7111fcf3a64",
+      "fromTable": "Log Data",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "276e612c-61db-47fc-d7d7-b9ce83e8b9c6",
+      "fromTable": "QDR_v_View",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "1493e9fc-b02e-3ddc-a9d1-13da84452b3f",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2c324475-1572-62da-700a-001b1974a91d",
+      "fromTable": "fact_deficiency",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "dd4097cc-61cf-a46e-8ad9-85b1489543c2",
+      "fromTable": "fact_deficiency_v_View",
+      "fromColumn": "dim_company_key",
+      "toTable": "dim_company_v (2)",
+      "toColumn": "dim_company_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "376b0044-c29e-4677-f03b-d3da0ced0471",
+      "fromTable": "dim_company_v",
+      "fromColumn": "dim_company_key",
+      "toTable": "dim_company_v (2)",
+      "toColumn": "dim_company_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_bcdc17a0-21ae-47ff-ae42-df0fb75048ff",
+      "fromTable": "fact_monthly_subcontractors_hours_by_project_v_View",
+      "fromColumn": "project_number",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_f1d4183a-5eb4-4478-ac56-3f897cfff1ae",
+      "fromTable": "fact_weekly_labor_head_count_v_View",
+      "fromColumn": "dim_company_key",
+      "toTable": "dim_company_v (2)",
+      "toColumn": "dim_company_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "452f0c86-5aad-7dcc-46dd-ece41d4516b3",
+      "fromTable": "fact_weekly_labor_hours_by_project_v_View",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "b41faa72-1fd1-2dea-fb3c-fd0ecf89de68",
+      "fromTable": "fact_weekly_labor_head_count_v_View",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (2)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_d8d30611-2c6d-45b2-874c-b6cd1556243c",
+      "fromTable": "vwcontrolactualscost_v",
+      "fromColumn": "CostItemId",
+      "toTable": "vwcontrolcurrentbudget_v",
+      "toColumn": "CostItemId",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_aaabd64d-9698-4a56-a9ee-ba06cfa1ca1c",
+      "fromTable": "vwcontrolactualsquantity_v",
+      "fromColumn": "CostItemId",
+      "toTable": "vwcontrolcurrentbudget_v",
+      "toColumn": "CostItemId",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_d808a1d8-953f-4256-be41-dbeab6b78c19",
+      "fromTable": "vwcontrolactualsmanhours_v",
+      "fromColumn": "CostItemId",
+      "toTable": "vwcontrolcurrentbudget_v",
+      "toColumn": "CostItemId",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "8e087941-7b3e-08c3-47a6-62d0af9ad41f",
+      "fromTable": "vwcontrolcurrentbudget_v",
+      "fromColumn": "ProjectId",
+      "toTable": "vwcoreproject_v",
+      "toColumn": "Project_ID",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2e6aaaeb-076a-4671-b841-648f8cc185e2",
+      "fromTable": "dim_project_v (1)",
+      "fromColumn": "project_number",
+      "toTable": "vwcoreproject_v",
+      "toColumn": "ExternalProjectId",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_345373e3-5fc4-4711-ab00-b167d8b71d3e",
+      "fromTable": "fact_opportunity_current_v",
+      "fromColumn": "opportunity_id",
+      "toTable": "dim_opportunity_v",
+      "toColumn": "opportunity_id",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_844398f0-6e1e-46b7-a14b-a4348770fc2b",
+      "fromTable": "dim_project_staff_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "4ed1a344-cbd1-e9ee-930a-549b48b4b950",
+      "fromTable": "fact_cvis_walk",
+      "fromColumn": "dim_safety_form_key",
+      "toTable": "dim_safety_form",
+      "toColumn": "dim_safety_form_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "54b929b5-e373-ef39-d6d1-890276fc8bae",
+      "fromTable": "dim_safety_form",
+      "fromColumn": "inspect_obs_id",
+      "toTable": "dim_obs_project",
+      "toColumn": "inspect_obs_id",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "9885e9d5-c774-abb5-a392-9211d834ed83",
+      "fromTable": "fact_safety_event_task",
+      "fromColumn": "dim_safety_form_key",
+      "toTable": "dim_safety_form",
+      "toColumn": "dim_safety_form_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "7b05f984-3f59-2cfb-eb4f-3f9506e83752",
+      "fromTable": "fact_psli",
+      "fromColumn": "fact_safety_event_task_key",
+      "toTable": "fact_safety_event_task",
+      "toColumn": "fact_safety_event_task_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "05ff1654-9e07-96db-b107-93ab804707ef",
+      "fromTable": "dim_obs_project",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (3)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "e8e3e6d3-c10e-e7cb-0e1e-a55d2ec40c47",
+      "fromTable": "fact_incident",
+      "fromColumn": "dim_safety_form_key",
+      "toTable": "dim_safety_form",
+      "toColumn": "dim_safety_form_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "703b2996-4a30-713a-f8d3-ef1da7d32396",
+      "fromTable": "fact_incident_event",
+      "fromColumn": "dim_safety_form_key",
+      "toTable": "dim_safety_form",
+      "toColumn": "dim_safety_form_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2910a3c7-a0ac-5e5f-fa54-b7d14adee548",
+      "fromTable": "dim_safety_form",
+      "fromColumn": "dim_reporter_compliance_user_key",
+      "toTable": "dim_compliance_user_v",
+      "toColumn": "dim_compliance_user_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "16046816-dc8c-e565-0413-78489767cf84",
+      "fromTable": "fact_stcky_walk_v",
+      "fromColumn": "dim_safety_form_key",
+      "toTable": "dim_safety_form",
+      "toColumn": "dim_safety_form_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "ca68d244-d6eb-9365-7391-66ffc50f491b",
+      "fromTable": "fact_stcky_walk_v",
+      "fromColumn": "dim_stcky_role_key",
+      "toTable": "dim_stcky_role_v",
+      "toColumn": "dim_stcky_role_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "013c1709-1e58-b6f0-cff9-ed0bd982f345",
+      "fromTable": "STCKY Walks",
+      "fromColumn": "inspect_obs_id",
+      "toTable": "dim_obs_project",
+      "toColumn": "inspect_obs_id",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "b22db13f-d15f-f10d-5c53-dd7c93b98123",
+      "fromTable": "health_scorecard_v",
+      "fromColumn": "project_number",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_0d86a86c-d6ac-43d5-908d-13a5f3c16898",
+      "fromTable": "vwcontrolactuals",
+      "fromColumn": "ProjectId",
+      "toTable": "vwcoreproject_v",
+      "toColumn": "Project_ID",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_9fe90d07-7cc6-400e-9cb9-1e392ad867cf",
+      "fromTable": "fact_reconciliation_v",
+      "fromColumn": "fact_mpr_base_key",
+      "toTable": "fact_mpr_base_v",
+      "toColumn": "fact_mpr_base_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "6b50a4f6-8470-a593-0891-38087bc061b7",
+      "fromTable": "fact_account_balance_monthly_detail_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "f70effef-80f1-7896-9250-46167c7a89d0",
+      "fromTable": "Proforma Actual",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "d36d8c7c-e5e0-0567-b546-6eff7b87be65",
+      "fromTable": "Proforma Budget",
+      "fromColumn": "Project Number",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_69c9f6d9-1a0a-4b48-9900-78720daee969",
+      "fromTable": "fact_actuals_v",
+      "fromColumn": "dim_cost_item_key",
+      "toTable": "dim_cost_item_v",
+      "toColumn": "dim_cost_item_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "79900694-abe8-8aa2-47a0-26eca7fb42a1",
+      "fromTable": "fact_time_card_v",
+      "fromColumn": "dim_cost_item_key",
+      "toTable": "dim_cost_item_v",
+      "toColumn": "dim_cost_item_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_733c47d1-4449-4893-bd58-989e1d2fcad3",
+      "fromTable": "dim_user_v",
+      "fromColumn": "user_id",
+      "toTable": "dim_compliance_user_v",
+      "toColumn": "user_id",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_63f387c4-1a0a-4780-ba79-be702b9f8bbf",
+      "fromTable": "fact_time_card_v",
+      "fromColumn": "dim_user_key",
+      "toTable": "dim_user_v",
+      "toColumn": "dim_user_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "7cff7294-8909-5d88-1d12-b50fd4cbd8f9",
+      "fromTable": "Project Grades",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_dcbdb3e8-a322-4d53-afb4-380ea54658d4",
+      "fromTable": "dim_project_v (profroma)",
+      "fromColumn": "project_number",
+      "toTable": "fact_project_cash_position_current_v",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_61a796ba-ab2e-4b8d-aae6-3999090b6ca3",
+      "fromTable": "dim_user_v",
+      "fromColumn": "employee_number",
+      "toTable": "STCKY Walker Roles",
+      "toColumn": "EmployeeNumber",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "AutoDetected_b09f04e1-1922-4ac1-af4b-45a9b459ab60",
+      "fromTable": "STCKY Walks",
+      "fromColumn": "role_name",
+      "toTable": "dim_stcky_role_v",
+      "toColumn": "role_name",
+      "crossFilteringBehavior": "",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "7daa7ca1-a8ce-0342-b881-48aa01eeb09b",
+      "fromTable": "Trending Data",
+      "fromColumn": "project_number",
+      "toTable": "Project Grades",
+      "toColumn": "project_number",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "2c59774a-ad0a-efe9-ee42-4ab07c7df494",
+      "fromTable": "dim_task_v",
+      "fromColumn": "dim_project_key",
+      "toTable": "dim_project_v (1)",
+      "toColumn": "dim_project_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "90c8cb1f-a49a-9310-ca68-9cb0ed420c5c",
+      "fromTable": "dim_activity_code_v",
+      "fromColumn": "dim_task_key",
+      "toTable": "dim_task_v",
+      "toColumn": "dim_task_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "9a5a14c2-0472-3f62-adb5-5cf5509506bb",
+      "fromTable": "fact_task_current_v",
+      "fromColumn": "dim_task_key",
+      "toTable": "dim_task_v",
+      "toColumn": "dim_task_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "78b32201-b50d-f9e1-d4fe-8ae895c4d732",
+      "fromTable": "fact_task_current_v",
+      "fromColumn": "dim_wbs_key",
+      "toTable": "dim_wbs_v",
+      "toColumn": "dim_wbs_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "084ca3b7-4e39-a6ce-7a6e-3b5ab1c44086",
+      "fromTable": "fact_task_current_v",
+      "fromColumn": "Key",
+      "toTable": "fact_task_baseline_current_v",
+      "toColumn": "Key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "39e5a796-90a6-2010-799e-fdc82b258695",
+      "fromTable": "fact_task_baseline_labor_daily_v",
+      "fromColumn": "fact_task_baseline_key",
+      "toTable": "fact_task_baseline_current_v",
+      "toColumn": "fact_task_baseline_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "5a72c250-5219-9576-d26d-e374bce9a9ad",
+      "fromTable": "fact_task_actual_labor_daily_v",
+      "fromColumn": "fact_task_key",
+      "toTable": "fact_task_current_v",
+      "toColumn": "fact_task_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    },
+    {
+      "name": "a5a15508-c2ad-9c83-4162-b4d7ec1fbf3c",
+      "fromTable": "fact_task_planned_labor_daily_v",
+      "fromColumn": "fact_task_key",
+      "toTable": "fact_task_current_v",
+      "toColumn": "fact_task_key",
+      "crossFilteringBehavior": "bothDirections",
+      "cardinality": "",
+      "isActive": true
+    }
+  ],
   "review": {
     "owner": "Power BI / Data Governance",
     "steward": "Assign steward",
     "certificationStatus": "in_review",
     "lastReviewed": null,
     "knownLimitations": [
-      "Report and semantic-model asset IDs must be attached before publication.",
       "Glossary and relationship mappings require steward review."
     ]
   }

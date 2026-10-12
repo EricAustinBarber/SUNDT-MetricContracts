@@ -1,0 +1,24 @@
+{
+  "reports": [
+    {
+      "name": "group-Group Health",
+      "alationId": 1785,
+      "externalId": "a9e46f0b-86b8-4ff0-9481-3bb4f0dd9644",
+      "role": "primary_report"
+    }
+  ],
+  "semanticModels": [
+    {
+      "name": "swa-dataset-project-controls-management-deathstar-pilot",
+      "alationId": 1355,
+      "externalId": "0b85fee7-230c-4f66-978e-084084e293d8",
+      "role": "report_parent_datasource"
+    },
+    {
+      "name": "swa-dataset-project-controls-management-executive",
+      "alationId": 1895,
+      "externalId": "6764eba3-b6a8-4c5b-a509-ffedf696f8e9",
+      "role": "reconciled_semantic_model"
+    }
+  ]
+}

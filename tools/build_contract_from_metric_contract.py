@@ -1,10 +1,16 @@
 """Convert the project metric_contract.json into the repository contract shape."""
 from __future__ import annotations
 import argparse
+import csv
 import json
 from pathlib import Path
 
-def build(source: Path, output: Path) -> None:
+def build(
+    source: Path,
+    output: Path,
+    assets_manifest: Path | None = None,
+    relationships_csv: Path | None = None,
+) -> None:
     src = json.loads(source.read_text(encoding="utf-8"))
     product = src.get("data_product", {})
     metrics = []
@@ -37,6 +43,29 @@ def build(source: Path, output: Path) -> None:
                 "notes": "Generated from the Power BI metric contract; steward review required.",
             },
         })
+    assets = {"reports": [], "semanticModels": []}
+    if assets_manifest:
+        manifest = json.loads(assets_manifest.read_text(encoding="utf-8"))
+        assets["reports"] = manifest.get("reports", [])
+        assets["semanticModels"] = manifest.get("semanticModels", [])
+
+    relationships = []
+    if relationships_csv:
+        with relationships_csv.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                relationships.append(
+                    {
+                        "name": row.get("name", ""),
+                        "fromTable": row.get("from_table", ""),
+                        "fromColumn": row.get("from_column", ""),
+                        "toTable": row.get("to_table", ""),
+                        "toColumn": row.get("to_column", ""),
+                        "crossFilteringBehavior": row.get("cross_filtering_behavior", ""),
+                        "cardinality": row.get("cardinality", ""),
+                        "isActive": str(row.get("is_active", "")).lower() == "true",
+                    }
+                )
+
     payload = {
         "contractVersion": "0.1.0",
         "contractStatus": "submitted",
@@ -47,15 +76,15 @@ def build(source: Path, output: Path) -> None:
             "businessContext": "Generated from the approved project semantic-model evidence.",
             "exampleQuestions": ["What does this metric mean?", "Which sources feed this metric?", "Which visuals consume this metric?"],
         },
-        "assets": {"reports": [], "semanticModels": []},
+        "assets": assets,
         "metrics": metrics,
-        "relationships": [],
+        "relationships": relationships,
         "review": {
             "owner": "Power BI / Data Governance",
             "steward": "Assign steward",
             "certificationStatus": "in_review",
             "lastReviewed": None,
-            "knownLimitations": ["Report and semantic-model asset IDs must be attached before publication.", "Glossary and relationship mappings require steward review."],
+            "knownLimitations": ["Glossary and relationship mappings require steward review."],
         },
     }
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -66,7 +95,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--assets-manifest", type=Path, default=None)
+    parser.add_argument("--relationships-csv", type=Path, default=None)
     args = parser.parse_args()
-    build(args.source, args.output)
+    build(args.source, args.output, args.assets_manifest, args.relationships_csv)
 
 if __name__ == "__main__": main()
