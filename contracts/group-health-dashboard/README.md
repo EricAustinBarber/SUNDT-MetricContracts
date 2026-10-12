@@ -35,3 +35,11 @@ this release, it records dataset `1355` as the DAX extraction source, report
 `1785` as the consuming report, and dataset `1895` as the reconciled semantic
 model identity. This preserves the distinction between where the expression
 was extracted and which deployed report/dataset it serves.
+
+Each metric also carries `deploymentPath`, including the report page, visual
+ID, visual title/type, field reference, model table, measure name, and edit
+directions when the measure is referenced by the extracted report layout. The
+current report inventory contains 194 field references across 192 visuals; 31
+of the 316 measures have direct visual references in this contract release.
+Measures without a direct visual reference remain valid semantic-model
+measures and may be consumed indirectly by other measures or report logic.

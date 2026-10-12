@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 from pathlib import Path
 
 def build(
@@ -10,6 +11,7 @@ def build(
     output: Path,
     assets_manifest: Path | None = None,
     relationships_csv: Path | None = None,
+    visual_inventory: Path | None = None,
 ) -> None:
     src = json.loads(source.read_text(encoding="utf-8"))
     product = src.get("data_product", {})
@@ -18,12 +20,37 @@ def build(
     semantic_models = manifest.get("semanticModels", [])
     source_model = next((item for item in semantic_models if item.get("role") == "report_parent_datasource"), {})
     reconciled_models = [item for item in semantic_models if item.get("role") == "reconciled_semantic_model"]
+    visuals_by_measure: dict[str, list[dict[str, str]]] = {}
+    if visual_inventory and visual_inventory.exists():
+        with visual_inventory.open(encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                if row.get("report_id") != "1785":
+                    continue
+                for reference in row.get("field_references", "").split(" | "):
+                    measure_name = reference.rsplit(".", 1)[-1]
+                    measure_name = re.sub(
+                        r"^(?:Sum|Min|Max|Count|DistinctCount|Average)\((.*)\)$",
+                        r"\1",
+                        measure_name,
+                        flags=re.IGNORECASE,
+                    )
+                    if measure_name:
+                        visuals_by_measure.setdefault(measure_name.upper(), []).append({
+                            "page": row.get("page_name", ""),
+                            "visualId": row.get("visual_id", ""),
+                            "visualName": row.get("visual_name", ""),
+                            "visualTitle": row.get("visual_title", ""),
+                            "visualType": row.get("visual_type", ""),
+                            "fieldReference": reference,
+                        })
     metrics = []
     for item in src.get("metrics", []):
+        name = item["name"]
+        visual_usage = visuals_by_measure.get(name.upper(), item.get("visual_usage", []))
         metrics.append({
-            "metricId": item["name"],
-            "displayName": item.get("display_name", item["name"]),
-            "definition": f"Power BI measure {item['name']} on {item['table']}.",
+            "metricId": name,
+            "displayName": item.get("display_name", name),
+            "definition": f"Power BI measure {name} on {item['table']}.",
             "modelTable": item["table"],
             "role": item.get("role", "base_value"),
             "expressionLanguage": "DAX",
@@ -45,8 +72,19 @@ def build(
                 "mappingBasis": "DAX extracted from the source semantic-model evidence; report and reconciled model references are explicit project identity mappings.",
             },
             "usage": {
-                "referenceCount": len(item.get("visual_usage", [])),
-                "visuals": [str(v.get("visual", v)) if isinstance(v, dict) else str(v) for v in item.get("visual_usage", [])],
+                "referenceCount": len(visual_usage),
+                "visuals": visual_usage,
+            },
+            "deploymentPath": {
+                "report": reports,
+                "sourceSemanticModel": source_model,
+                "reconciledSemanticModels": reconciled_models,
+                "measureName": name,
+                "editDirections": [
+                    "Open the mapped Power BI report and locate the listed page and visual.",
+                    "Open the report's mapped semantic model/dataset and locate the model table and measure.",
+                    "Edit the measure DAX in the semantic model; visuals consume the measure and do not own the DAX definition.",
+                ],
             },
             "glossaryTerms": [],
             "review": {
@@ -107,7 +145,8 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--assets-manifest", type=Path, default=None)
     parser.add_argument("--relationships-csv", type=Path, default=None)
+    parser.add_argument("--visual-inventory", type=Path, default=None)
     args = parser.parse_args()
-    build(args.source, args.output, args.assets_manifest, args.relationships_csv)
+    build(args.source, args.output, args.assets_manifest, args.relationships_csv, args.visual_inventory)
 
 if __name__ == "__main__": main()
