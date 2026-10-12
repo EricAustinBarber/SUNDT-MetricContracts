@@ -42,6 +42,17 @@ def main() -> int:
             source_rows[key] = (row_number, row)
 
     raw_lines = raw_name_lines(raw_schema_path)
+    assets = contract.get("assets", {})
+    report_ids = " | ".join(str(item.get("alationId", "")) for item in assets.get("reports", []))
+    source_model = next(
+        (item for item in assets.get("semanticModels", []) if item.get("role") == "report_parent_datasource"),
+        {},
+    )
+    reconciled_ids = " | ".join(
+        str(item.get("alationId", ""))
+        for item in assets.get("semanticModels", [])
+        if item.get("role") == "reconciled_semantic_model"
+    )
     output_rows: list[dict[str, object]] = []
     for metric in contract.get("metrics", []):
         table = str(metric.get("modelTable", ""))
@@ -56,6 +67,9 @@ def main() -> int:
             {
                 "metric_id": measure,
                 "model_table": table,
+                "report_alation_ids": report_ids,
+                "dax_source_semantic_model_alation_id": source_model.get("alationId", ""),
+                "reconciled_semantic_model_alation_ids": reconciled_ids,
                 "contract_dax_sha256": hashlib.sha256(contract_dax.encode("utf-8")).hexdigest(),
                 "inventory_dax_sha256": hashlib.sha256(extracted_dax.strip().encode("utf-8")).hexdigest() if source else "",
                 "dax_exact_match": normalize(contract_dax) == normalize(extracted_dax) if source else False,

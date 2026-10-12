@@ -29,3 +29,9 @@ It links every contract metric to:
 The current manifest reports an exact DAX match for all 316 metrics. The raw
 Power BI evidence is retained in the sibling `semantic-model-documentation`
 directory and was not modified by this contract project.
+
+Each metric also carries a `powerBiAssetRefs` object in the JSON contract. For
+this release, it records dataset `1355` as the DAX extraction source, report
+`1785` as the consuming report, and dataset `1895` as the reconciled semantic
+model identity. This preserves the distinction between where the expression
+was extracted and which deployed report/dataset it serves.

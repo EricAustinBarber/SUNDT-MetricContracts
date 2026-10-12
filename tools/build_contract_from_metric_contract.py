@@ -13,6 +13,11 @@ def build(
 ) -> None:
     src = json.loads(source.read_text(encoding="utf-8"))
     product = src.get("data_product", {})
+    manifest = json.loads(assets_manifest.read_text(encoding="utf-8")) if assets_manifest else {}
+    reports = manifest.get("reports", [])
+    semantic_models = manifest.get("semanticModels", [])
+    source_model = next((item for item in semantic_models if item.get("role") == "report_parent_datasource"), {})
+    reconciled_models = [item for item in semantic_models if item.get("role") == "reconciled_semantic_model"]
     metrics = []
     for item in src.get("metrics", []):
         metrics.append({
@@ -33,6 +38,12 @@ def build(
                 "alationObjectIds": [],
                 "status": "matched" if item.get("source_lineage") else "model_only",
             },
+            "powerBiAssetRefs": {
+                "daxSourceSemanticModel": source_model,
+                "consumedByReports": reports,
+                "reconciledSemanticModels": reconciled_models,
+                "mappingBasis": "DAX extracted from the source semantic-model evidence; report and reconciled model references are explicit project identity mappings.",
+            },
             "usage": {
                 "referenceCount": len(item.get("visual_usage", [])),
                 "visuals": [str(v.get("visual", v)) if isinstance(v, dict) else str(v) for v in item.get("visual_usage", [])],
@@ -44,10 +55,9 @@ def build(
             },
         })
     assets = {"reports": [], "semanticModels": []}
-    if assets_manifest:
-        manifest = json.loads(assets_manifest.read_text(encoding="utf-8"))
-        assets["reports"] = manifest.get("reports", [])
-        assets["semanticModels"] = manifest.get("semanticModels", [])
+    if manifest:
+        assets["reports"] = reports
+        assets["semanticModels"] = semantic_models
 
     relationships = []
     if relationships_csv:
