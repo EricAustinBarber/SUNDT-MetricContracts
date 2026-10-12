@@ -64,7 +64,10 @@ contract or using browser authentication.
 
 1. Run `tools/validate_all_contracts.py`.
 2. Build `build/group-health-data-product-0.1.0.json`.
-3. Validate the payload against the retrieved Alation schema.
+3. Run `tools/validate_data_product_payload.py` and validate the payload
+   against the retrieved Alation schema. The repository validator reconciles
+   every metric's exact DAX and every extracted relationship; a full JSON Schema
+   package can be added to CI when dependency management is approved.
 4. Resolve and read the target product.
 5. Perform a dry-run diff against the existing product.
 6. Publish only the approved version.

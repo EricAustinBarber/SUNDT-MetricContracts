@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'contracts/**'
+      - 'build/**'
+      - 'config/**'
       - 'schemas/**'
       - 'tools/**'
       - '.github/workflows/validate-contracts.yml'
@@ -11,6 +13,8 @@ on:
     branches: [main]
     paths:
       - 'contracts/**'
+      - 'build/**'
+      - 'config/**'
       - 'schemas/**'
       - 'tools/**'
       - '.github/workflows/validate-contracts.yml'
@@ -25,3 +29,8 @@ jobs:
           python-version: '3.11'
       - name: Validate contracts
         run: python tools/validate_all_contracts.py
+      - name: Validate Data Product payload
+        run: >-
+          python tools/validate_data_product_payload.py
+          --contract contracts/group-health-dashboard/0.1.0.json
+          --payload build/group-health-data-product-0.1.0.json
