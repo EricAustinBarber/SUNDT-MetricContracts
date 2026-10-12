@@ -1,0 +1,28 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.token
+*.secret
+
+# Power BI and data extracts
+*.pbix
+*.pbit
+*.csv
+*.parquet
+*.xlsx
+*.xlsm
+*.zip
+raw/
+exports/
+
+# Python and local tooling
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/

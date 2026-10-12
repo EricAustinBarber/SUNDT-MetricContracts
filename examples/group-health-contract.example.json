@@ -1,0 +1,35 @@
+{
+  "contractVersion": "0.1.0",
+  "contractStatus": "validated",
+  "product": {
+    "productId": "group-health-dashboard",
+    "name": "Group Health Dashboard",
+    "description": "Governed example contract for a Power BI executive health semantic model.",
+    "businessContext": "Illustrative example based on the Group Health analysis. Replace or extend with the current approved contract before publication.",
+    "exampleQuestions": ["What is the total health score?", "Which visuals consume the score?"]
+  },
+  "assets": {
+    "reports": [{"name": "group-Group Health", "alationId": 1785, "externalId": "a9e46f0b-86b8-4ff0-9481-3bb4f0dd9644", "owner": "kcrussell@sundt.com", "parentDatasourceExternalId": "0b85fee7-230c-4f66-978e-084084e293d8"}],
+    "semanticModels": [{"name": "swa-dataset-project-controls-management-executive", "alationId": 1895, "externalId": "6764eba3-b6a8-4c5b-a509-ffedf696f8e9", "owner": null, "parentDatasourceExternalId": null}]
+  },
+  "metrics": [{
+    "metricId": "total_score_measure",
+    "displayName": "Total Score",
+    "definition": "Weighted health score across financial, quality, safety, and schedule components.",
+    "modelTable": "00 Measures",
+    "role": "weighted_score",
+    "expressionLanguage": "DAX",
+    "daxExpression": "DIVIDE([Financial Score] + [Quality Score] + [Safety Score] + [Schedule Score], 4)",
+    "formatString": "0.00%;-0.00%;0.00%",
+    "grain": "project_or_report_context",
+    "aggregationRule": "Do not sum; evaluate in report filter context.",
+    "directDependencies": [],
+    "transitiveDependencies": [],
+    "lineage": {"sourcePaths": [], "alationObjectIds": [], "status": "model_only"},
+    "usage": {"referenceCount": 0, "visuals": []},
+    "glossaryTerms": ["Group Health Score"],
+    "review": {"status": "in_review", "notes": "Illustrative example only; replace this sanitized DAX with the approved model expression before publication."}
+  }],
+  "relationships": [],
+  "review": {"owner": "Power BI / Data Governance", "steward": "Assign steward", "certificationStatus": "in_review", "lastReviewed": null, "knownLimitations": ["Example contains a deliberate DAX placeholder."]}
+}

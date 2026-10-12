@@ -1,0 +1,4 @@
+# Replace these role placeholders with the approved Sundt Git identities
+# before enabling branch protection.
+# /contracts/ @powerbi-peer-reviewer @data-steward
+# /schemas/ /tools/ /docs/ @data-governance-owner

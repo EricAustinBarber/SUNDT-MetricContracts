@@ -1,0 +1,57 @@
+{
+  "contractVersion": "0.1.0",
+  "contractStatus": "draft",
+  "product": {
+    "productId": "replace-with-product-id",
+    "name": "Replace with semantic model or data product name",
+    "description": "Describe the governed business purpose and intended consumers.",
+    "businessContext": "Describe the business process, population, grain, and decision supported.",
+    "exampleQuestions": [
+      "What does this metric mean?",
+      "Which source tables feed this metric?",
+      "Which reports consume this metric?"
+    ]
+  },
+  "assets": {
+    "reports": [],
+    "semanticModels": []
+  },
+  "metrics": [
+    {
+      "metricId": "replace-with-stable-metric-id",
+      "displayName": "Replace with display name",
+      "definition": "Business definition written in plain language.",
+      "modelTable": "replace-with-model-table",
+      "role": "base_value",
+      "expressionLanguage": "DAX",
+      "daxExpression": "REPLACE WITH EXACT DAX",
+      "formatString": "",
+      "grain": "Describe the valid evaluation grain.",
+      "aggregationRule": "Describe whether sum, average, ratio, or no aggregation is allowed.",
+      "directDependencies": [],
+      "transitiveDependencies": [],
+      "lineage": {
+        "sourcePaths": [],
+        "alationObjectIds": [],
+        "status": "unresolved"
+      },
+      "usage": {
+        "referenceCount": 0,
+        "visuals": []
+      },
+      "glossaryTerms": [],
+      "review": {
+        "status": "unreviewed",
+        "notes": ""
+      }
+    }
+  ],
+  "relationships": [],
+  "review": {
+    "owner": "Assign accountable owner",
+    "steward": "Assign steward",
+    "certificationStatus": "unreviewed",
+    "lastReviewed": null,
+    "knownLimitations": []
+  }
+}

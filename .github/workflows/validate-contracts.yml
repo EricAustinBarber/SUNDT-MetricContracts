@@ -1,0 +1,27 @@
+name: Validate Power BI contracts
+
+on:
+  pull_request:
+    paths:
+      - 'contracts/**'
+      - 'schemas/**'
+      - 'tools/**'
+      - '.github/workflows/validate-contracts.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'contracts/**'
+      - 'schemas/**'
+      - 'tools/**'
+      - '.github/workflows/validate-contracts.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate contracts
+        run: python tools/validate_all_contracts.py
