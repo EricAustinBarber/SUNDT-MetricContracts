@@ -55,6 +55,16 @@ Authorization must be validated with these read-only checks:
 4. The returned product ID is confirmed to be `group-health-dashboard`.
 5. A publication service identity can read the product after publication.
 
+Run the repository diagnostic with:
+
+```powershell
+python tools/check_data_product_access.py --product-id group-health-dashboard
+```
+
+Exit code `2` means the target product endpoint returned `401` or `403` and
+the service identity needs Data Product permission. The diagnostic never
+attempts a Data Product write.
+
 Testing alternate header formats does not replace a Data Product Service scope
 or role grant. If all supported headers return 401, request the Data Product
 Service permission for the service identity/token rather than changing the
